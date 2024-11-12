@@ -5,7 +5,7 @@ import { pool } from "../db/connection.js";
 const getPlayers = async (teamID) => {
   const values = [teamID];
   const consulta =
-    "SELECT j.name, j.position FROM jugadores j INNER JOIN equipos e ON j.id_equipo = e.id WHERE e.id = $1;";
+    "SELECT j.name as jugador, p.name as posicion FROM jugadores j INNER JOIN posiciones p ON j.position = p.id WHERE j.id_equipo = $1;";
   const { rows: players } = await pool.query(consulta, values);
   return players;
 };
